@@ -1,0 +1,73 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Task to perform a count down",
+        "version": "1"
+    },
+    "tags": [{
+        "name": "count down"
+    }],
+    "paths": {
+        "/CountDown": {
+            "summary": "Count Down",
+            "description": "To start a count down",
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Input"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "When the count down finishes successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessfulResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "When the given parameters fail validations - e.g. lowerLimit cannot be higher than upperLimit"
+                    },
+                    "500": {
+                        "description": "When the count down fails"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Input": {
+                "type": "object",
+                "properties": {
+                    "upperLimit": {
+                        "type": "number",
+                        "maximum": 100,
+                        "minimum": 1
+                    },
+                    "lowerLimit": {
+                        "type": "number",
+                        "maximum": 100,
+                        "minimum": 1
+                    }
+                }
+            },
+            "SuccessfulResponse": {
+                "type": "object",
+                "properties": {
+                    "endTime": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            }
+        }
+    }
+}
