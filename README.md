@@ -80,6 +80,9 @@ Note that the built-in tasks use the `AMAZON` namespace, so they are specified u
 `AMAZON.ScheduleTaxiReservation`. When fully registered, custom tasks will be namespaced with the skill ID using
 the same notation. For example, `amzn1.alexa.skills.0000-0000-0000-0001.CountDown`.
 
+The version of the task should be an integer number represented as a string in the `version` field in OpenAPI spec.
+For example, `1`, `2`, `3` etc.
+
 ## Defining Input Parameters
 
 Once you know what functionality your task will provide, you can now start defining the parameters that the task
