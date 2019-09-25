@@ -52,8 +52,21 @@ To create a new custom task definition:
 1. Fork this repository: https://github.com/alexa-labs/alexa-custom-task-definitions
 2. Create a top level directory for your own skill.
 3. In the skill directory, follow below sections to create the task definition OpenAPI specification files
-   and a `README.md` describing the tasks defined.
+   , a `README.md` describing the tasks defined and a list of example valid JSON payloads.
 4. Do a pull request for Alexa team to review.
+
+Your directory should look like the following:
+```
+<SkillName>/
+    tasks/
+        <TaskName>.<TaskVersion>.json
+    samples/
+        <TaskName>/<TaskVersion>/
+            <Sample1>.json
+            <Sample2>.json
+            ...
+    README.md
+```
 
 ## Task Definition File
 
@@ -79,9 +92,6 @@ characters are allowed. As a rule of thumb, use PascalCase for the task name.
 Note that the built-in tasks use the `AMAZON` namespace, so they are specified using a period, like this:
 `AMAZON.ScheduleTaxiReservation`. When fully registered, custom tasks will be namespaced with the skill ID using
 the same notation. For example, `amzn1.alexa.skills.0000-0000-0000-0001.CountDown`.
-
-The version of the task should be an integer number represented as a string in the `version` field in OpenAPI spec.
-For example, `1`, `2`, `3` etc.
 
 ## Defining Input Parameters
 
@@ -200,3 +210,15 @@ down finished:
 ## (Optional) Splitting Up Definitions Through References
 Since we follow OpenAPI specification, references through `$ref` are also supported.
 Please see `samples/SuperCountdown/CountDown.1.json` for the full example.
+
+## Providing Sample Payloads
+For certification purposes, we would need sample payloads as to validate the schemas
+that you have added. For the `CountDown.1.json` task schema example above, the below
+would be a valid payload:
+
+```
+{
+    "upperLimit": 10,
+    "lowerLimit": 1
+}
+```
