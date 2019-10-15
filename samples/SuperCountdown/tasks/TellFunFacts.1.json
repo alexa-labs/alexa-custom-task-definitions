@@ -1,0 +1,68 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Task to tell fun facts",
+    "version": "1"
+  },
+  "tags": [{
+    "name": "tell fun facts"
+  }],
+  "paths": {
+    "/TellAFunFact": {
+      "summary": "tell fun facts",
+      "description": "To tell fun facts",
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Input"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "When the fun facts telling successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessfulResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "When the given parameters fail validations - e.g. factsNumber cannot be 0"
+          },
+          "500": {
+            "description": "When the fun facts telling fails"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Input": {
+        "type": "object",
+        "properties": {
+          "factsNumber": {
+            "type": "number",
+            "maximum": 50,
+            "minimum": 1
+          }
+        }
+      },
+      "SuccessfulResponse": {
+        "type": "object",
+        "properties": {
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}
