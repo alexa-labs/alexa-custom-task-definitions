@@ -1,0 +1,71 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Task to play a sound in Sound Machine, such as an ambient rain sound",
+    "version": "1"
+  },
+  "tags": [{
+    "name": "play Sound Machine"
+  }],
+  "paths": {
+    "/SoundMachine": {
+      "summary": "play Sound Machine",
+      "description": "To play Sound Machine",
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Input"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "When Sound Machine plays successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessfulResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "When the given parameters fail validations - e.g. sound does not exist"
+          },
+          "500": {
+            "description": "When Sound Machine fails"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Input": {
+        "type": "object",
+        "properties": {
+          "requesterSkillId": {
+            "type": "string"
+          },
+          "sound": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "string"
+          }
+        }
+      },
+      "SuccessfulResponse": {
+        "type": "object",
+        "properties": {
+          "startedSoundMachine": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}
